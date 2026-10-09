@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathMaster Pro - Smart Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="story-mode.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle">🌙</button>
+    
+    <!-- Settings Button -->
+    <button id="settings-btn" class="settings-btn">⚙️</button>
+    
+    <!-- Coins Display -->
+    <div id="coins-display" class="coins-display">
+        <span class="coin-icon">💰</span>
+        <span id="coin-count">0</span>
+    </div>
+    
+    <!-- Main Menu -->
+    <div id="main-menu" class="main-menu">
+        <div class="menu-container">
+            <div class="avatar-display">
+                <span id="current-avatar" class="current-avatar">🧠</span>
+            </div>
+            <h1 class="logo">🧠 MathMaster Pro</h1>
+            <p class="tagline">Master Math with AI-Powered Learning</p>
+            
+            <div class="streak-display">
+                <span class="streak-icon">🔥</span>
+                <span id="streak-count">0</span>
+                <span class="streak-label">Day Streak</span>
+            </div>
+            
+            <div class="mode-selection">
+                <button class="mode-btn" data-mode="classic">
+                    <span class="mode-icon">⚡</span>
+                    <span class="mode-title">Classic Mode</span>
+                    <span class="mode-desc">Beat the clock!</span>
+                </button>
+                <button class="mode-btn" data-mode="practice">
+                    <span class="mode-icon">📚</span>
+                    <span class="mode-title">Practice Mode</span>
+                    <span class="mode-desc">Focus on weak topics</span>
+                </button>
+                <button class="mode-btn" data-mode="hardcore">
+                    <span class="mode-icon">🔥</span>
+                    <span class="mode-title">Hardcore Mode</span>
+                    <span class="mode-desc">No mercy!</span>
+                </button>
+                <button class="mode-btn" data-mode="shooting">
+                    <span class="mode-icon">🎯</span>
+                    <span class="mode-title">Shooting Mode</span>
+                    <span class="mode-desc">Solve math to fire at enemies!</span>
+                </button>
+                <button class="mode-btn" data-mode="battle">
+                    <span class="mode-icon">⚔️</span>
+                    <span class="mode-title">1v1 Battle Mode</span>
+                    <span class="mode-desc">Race against opponent!</span>
+                </button>
+                <button class="mode-btn" data-mode="story">
+                    <span class="mode-icon">🗺️</span>
+                    <span class="mode-title">Story Mode</span>
+                    <span class="mode-desc">Conquer India city by city!</span>
+                </button>
+            </div>
+            
+            <button id="view-stats-btn" class="secondary-btn">📊 View Analytics</button>
+            <button id="shop-btn" class="secondary-btn">🛒 Shop</button>
+        </div>
+    </div>
+
+    <!-- Practice Mode Selection -->
+    <div id="practice-menu" class="practice-menu hidden">
+        <div class="menu-container">
+            <h2>Choose Operation to Practice</h2>
+            <div class="operation-grid">
+                <button class="operation-btn" data-op="+">➕ Addition</button>
+                <button class="operation-btn" data-op="-">➖ Subtraction</button>
+                <button class="operation-btn" data-op="*">✖️ Multiplication</button>
+                <button class="operation-btn" data-op="/">➗ Division</button>
+            </div>
+            <button id="back-to-menu" class="secondary-btn">← Back</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="game-screen hidden">
+        <div class="game-header">
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="info-label">Level</span>
+                    <span id="level" class="info-value">1</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Score</span>
+                    <span id="score" class="info-value">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Combo</span>
+                    <span id="combo" class="info-value">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Accuracy</span>
+                    <span id="accuracy" class="info-value">100%</span>
+                </div>
+            </div>
+            
+            <div class="timer-container">
+                <div id="timer-bar" class="timer-bar"></div>
+                <span id="timer" class="timer-text">30</span>
+            </div>
+        </div>
+
+        <div id="powerup-container" class="powerup-container"></div>
+
+        <div class="badges-display" id="badges-display"></div>
+
+        <div class="question-box">
+            <h2 id="question">5 + 3 = ?</h2>
+        </div>
+        
+        <div class="answer-input">
+            <input type="number" id="answer" placeholder="Your answer" autofocus>
+            <button id="submit-btn">Submit</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+        
+        <button id="pause-btn" class="pause-btn">⏸️ Pause</button>
+    </div>
+
+    <!-- Shooting Game Mode Screen -->
+    <div id="shooting-screen" class="shooting-screen hidden">
+        <div class="shooting-container">
+            <div id="shooting-game-area">
+                <div class="shooting-header">
+                    <h2>🎯 Math Shooter</h2>
+                    <div class="shooting-stats">
+                        <div class="shooting-stat">
+                            <span class="label">Score:</span>
+                            <span id="shooting-score">0</span>
+                        </div>
+                        <div class="shooting-stat">
+                            <span class="label">Level:</span>
+                            <span id="shooting-level">1</span>
+                        </div>
+                        <div class="shooting-stat">
+                            <span class="label">Time:</span>
+                            <span id="shooting-timer">60</span>s
+                        </div>
+                        <div class="shooting-stat">
+                            <span class="label">Lives:</span>
+                            <span id="shooting-lives">❤️❤️❤️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shooting-game-area">
+                    <canvas id="shooting-canvas" width="500" height="500"></canvas>
+                    
+                    <div class="shooting-controls">
+                        <div class="shooting-question-box">
+                            <p id="shooting-question">5 + 3 = ?</p>
+                        </div>
+                        <div class="shooting-answer-input">
+                            <input type="number" id="shooting-answer" placeholder="Answer & Fire!">
+                            <button id="shooting-submit">🔫 FIRE</button>
+                        </div>
+                        <div id="shooting-feedback" class="shooting-feedback"></div>
+                    </div>
+                </div>
+
+                <button id="shooting-exit" class="secondary-btn">← Exit Shooting Mode</button>
+            </div>
+
+            <div id="shooting-game-over" class="shooting-game-over hidden">
+                <h2>🎮 Game Over!</h2>
+                <div class="shooting-final-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">Final Score</span>
+                        <span id="shooting-final-score" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Level Reached</span>
+                        <span id="shooting-final-level" class="stat-value">1</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Enemies Destroyed</span>
+                        <span id="shooting-final-enemies" class="stat-value">0</span>
+                    </div>
+                </div>
+                <div class="shooting-game-over-actions">
+                    <button id="shooting-restart" class="primary-btn">🔄 Play Again</button>
+                    <button id="shooting-menu" class="secondary-btn">🏠 Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1v1 Battle Mode Screen -->
+    <div id="battle-screen" class="battle-screen hidden">
+        <div class="battle-container">
+            <div id="battle-game-area">
+                <div class="battle-header">
+                    <h2>⚔️ 1v1 Battle Mode</h2>
+                    <div class="battle-timer-container">
+                        <div id="battle-timer-bar" class="battle-timer-bar"></div>
+                        <span id="battle-timer" class="battle-timer-text">60</span>s
+                    </div>
+                </div>
+
+                <div class="battle-arena">
+                    <!-- Player Side -->
+                    <div class="battle-player">
+                        <div class="player-info">
+                            <span class="player-avatar" id="player-avatar-battle">🧠</span>
+                            <span class="player-name">You</span>
+                        </div>
+                        <div class="score-display">
+                            <span id="player-score" class="score-value">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="player-progress" class="progress-fill player"></div>
+                        </div>
+                        <div id="battle-feedback" class="battle-feedback"></div>
+                    </div>
+
+                    <!-- VS Divider -->
+                    <div class="vs-divider">
+                        <span class="vs-text">VS</span>
+                    </div>
+
+                    <!-- Opponent Side -->
+                    <div class="battle-opponent">
+                        <div class="player-info">
+                            <span class="player-avatar" id="opponent-avatar">🤖</span>
+                            <span class="player-name" id="opponent-name">Opponent</span>
+                        </div>
+                        <div class="score-display">
+                            <span id="opponent-score" class="score-value">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="opponent-progress" class="progress-fill opponent"></div>
+                        </div>
+                        <div id="opponent-feedback" class="battle-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="battle-question-area">
+                    <div class="battle-question-box">
+                        <p id="battle-question">5 + 3 = ?</p>
+                    </div>
+                    <div class="battle-answer-input">
+                        <input type="number" id="battle-answer" placeholder="Your answer">
+                        <button id="battle-submit">⚡ Submit</button>
+                    </div>
+                </div>
+
+                <button id="battle-exit" class="secondary-btn">← Exit Battle</button>
+            </div>
+
+            <div id="battle-result" class="battle-result hidden">
+                <div class="result-icon" id="battle-result-icon">🏆</div>
+                <h2 id="battle-result-title">Victory!</h2>
+                <div class="battle-final-stats">
+                    <div class="final-stat">
+                        <span class="stat-label">Your Score</span>
+                        <span id="battle-final-player-score" class="stat-value">0</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="stat-label">Opponent Score</span>
+                        <span id="battle-final-opponent-score" class="stat-value">0</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="stat-label">Your Accuracy</span>
+                        <span id="battle-player-accuracy" class="stat-value">0%</span>
+                    </div>
+                </div>
+                <p id="battle-coins-earned" class="coins-earned"></p>
+                <div class="battle-result-actions">
+                    <button id="battle-restart" class="primary-btn">🔄 Battle Again</button>
+                    <button id="battle-menu" class="secondary-btn">🏠 Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Mode Screen -->
+    <div id="story-screen" class="story-screen hidden">
+        <div class="story-container">
+            <!-- City Selection -->
+            <div id="story-city-selection" class="story-city-selection">
+                <h2>🗺️ Choose Your City to Conquer</h2>
+                <p class="story-subtitle">Travel across India and defeat math bosses in every city!</p>
+                <div id="city-grid" class="city-grid"></div>
+                <button id="story-exit" class="secondary-btn">← Back to Menu</button>
+            </div>
+
+            <!-- City Match Area -->
+            <div id="story-game-area" class="story-game-area hidden">
+                <div class="story-header">
+                    <div class="city-info">
+                        <span id="story-city-icon" class="city-icon-large">🏙️</span>
+                        <h3 id="story-city-name">Mumbai</h3>
+                    </div>
+                    <div class="match-progress">
+                        <p id="story-matches-progress">Match 1 / 10</p>
+                        <div class="progress-bar-container">
+                            <div id="story-progress-bar" class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                    <div class="story-score-display">
+                        <span class="label">Score:</span>
+                        <span id="story-score">0</span>
+                    </div>
+                </div>
+
+                <div class="story-question-box">
+                    <p id="story-question">5 + 3 = ?</p>
+                </div>
+
+                <div class="story-answer-input">
+                    <input type="number" id="story-answer" placeholder="Your answer">
+                    <button id="story-submit">✓ Submit</button>
+                </div>
+
+                <div id="story-feedback" class="story-feedback"></div>
+            </div>
+
+            <!-- Boss Fight Area -->
+            <div id="story-boss-fight" class="story-boss-fight hidden">
+                <div class="boss-header">
+                    <h2>⚔️ BOSS FIGHT!</h2>
+                    <p id="boss-city">Boss of Mumbai</p>
+                </div>
+
+                <div class="boss-arena">
+                    <div class="boss-display">
+                        <div class="boss-avatar" id="boss-icon">👑</div>
+                        <h3 id="boss-name">Boss Name</h3>
+                        <div class="boss-hp-container">
+                            <div id="boss-hp-bar" class="boss-hp-bar"></div>
+                        </div>
+                        <p id="boss-lives">❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</p>
+                    </div>
+
+                    <div class="vs-text-large">VS</div>
+
+                    <div class="player-display">
+                        <div class="player-avatar-large">🧠</div>
+                        <h3>You</h3>
+                        <p id="player-lives-boss">💚💚💚</p>
+                        <p class="lives-warning">⚠️ No mistakes allowed!</p>
+                    </div>
+                </div>
+
+                <div class="boss-question-box">
+                    <p id="boss-question">5 + 3 = ?</p>
+                </div>
+
+                <div class="boss-answer-input">
+                    <input type="number" id="boss-answer" placeholder="Your answer">
+                    <button id="boss-submit">⚔️ Attack!</button>
+                </div>
+
+                <div id="boss-feedback" class="story-feedback"></div>
+            </div>
+
+            <!-- Victory Screen -->
+            <div id="story-victory" class="story-victory hidden">
+                <div class="victory-icon" id="victory-city-icon">🏙️</div>
+                <h2>🎉 City Conquered!</h2>
+                <h3 id="victory-city-name">Mumbai</h3>
+                <div class="victory-stats">
+                    <div class="victory-stat">
+                        <span class="label">Final Score</span>
+                        <span id="victory-score" class="value">0</span>
+                    </div>
+                    <div class="victory-stat">
+                        <span class="label">Coins Earned</span>
+                        <span id="victory-coins" class="value">+50</span>
+                    </div>
+                </div>
+                <p id="victory-message" class="victory-message">Great job!</p>
+                <div class="victory-actions">
+                    <button id="next-city" class="primary-btn">🗺️ Next City</button>
+                    <button id="story-menu" class="secondary-btn">🏠 Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over" class="game-over hidden">
+        <div class="game-over-container">
+            <h2>🎯 Game Complete!</h2>
+            
+            <div class="final-stats">
+                <div class="stat-card">
+                    <span class="stat-label">Final Score</span>
+                    <span id="final-score" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Level Reached</span>
+                    <span id="final-level" class="stat-value">1</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Accuracy</span>
+                    <span id="final-accuracy" class="stat-value">0%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Best Combo</span>
+                    <span id="final-combo" class="stat-value">0</span>
+                </div>
+            </div>
+
+            <div id="new-badges" class="new-badges"></div>
+            
+            <div id="weak-topics" class="weak-topics"></div>
+
+            <div class="game-over-actions">
+                <button id="restart-btn" class="primary-btn">🔄 Play Again</button>
+                <button id="menu-btn" class="secondary-btn">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Dashboard -->
+    <div id="analytics-screen" class="analytics-screen hidden">
+        <div class="analytics-container">
+            <h2>📊 Your Analytics Dashboard</h2>
+            
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>🏆 Best Score</h3>
+                    <p id="best-score" class="big-stat">0</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>🎯 Total Games</h3>
+                    <p id="total-games" class="big-stat">0</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>📈 Avg Accuracy</h3>
+                    <p id="avg-accuracy" class="big-stat">0%</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>⚡ Best Combo</h3>
+                    <p id="best-combo-stat" class="big-stat">0</p>
+                </div>
+            </div>
+
+            <div class="performance-section">
+                <h3>📉 Performance by Operation</h3>
+                <div id="operation-stats" class="operation-stats"></div>
+            </div>
+
+            <div class="badges-section">
+                <h3>🏅 Earned Badges</h3>
+                <div id="earned-badges" class="earned-badges"></div>
+            </div>
+
+            <button id="close-analytics" class="secondary-btn">← Back to Menu</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="emoji-patch.js"></script>
+    <script src="features-addon.js"></script>
+    <script src="battle-mode.js"></script>
+    <script src="story-mode.js"></script>
+    <script>
+        // Debug: Check if scripts loaded
+        console.log('All scripts loaded');
+        console.log('persistentStats exists:', typeof persistentStats !== 'undefined');
+        console.log('BADGES exists:', typeof BADGES !== 'undefined');
+    </script>
+</body>
+</html>
